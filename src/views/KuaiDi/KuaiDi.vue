@@ -79,7 +79,8 @@
                 style="color:#FF5722;"> {{num}}</span>
         </div>
         <div>
-          <span class="message">打印文件:</span><span class="number">{{imgName_chuKu}}</span>
+          <span class="message">打印文件:</span><span class="number"
+                style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:136px;">{{imgName_chuKu}}</span>
         </div>
       </div>
     </el-tab-pane>
@@ -265,7 +266,7 @@ export default {
     },
     //限制打印的张数5张
     limitNum () {
-      if (this.liList_chuKu.length >= 5) {
+      if (this.liList_chuKu.length >= 4) { //this.liList_chuku.length对应的下标
         this.$notify.error({
           title: '警告',
           message: '最多只能添加5张'

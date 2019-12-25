@@ -24,7 +24,10 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         inputPattern: /^[a-zA-Z0-9]{16}$/,
-        inputErrorMessage: '型号不正确'
+        inputErrorMessage: '型号不正确',
+        showClose: false,
+        showCancelButton: false,
+        closeOnClickModal: false
       }).then(({ value }) => {
         printStatus(value).then((res) => {
           const status = res.data.main;
