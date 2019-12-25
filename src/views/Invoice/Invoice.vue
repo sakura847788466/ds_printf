@@ -244,11 +244,7 @@ export default {
     //时间差
     timeDifference (startTime, endTime) { //可以传日期时间或时间戳
       const times = (endTime - startTime) / 1000
-
-      console.log(times)
       this.time = times
-      console.log(this.time)
-
     },
     //删除
     delImg_chukudan (i) {

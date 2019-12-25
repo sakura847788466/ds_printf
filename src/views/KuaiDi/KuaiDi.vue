@@ -231,24 +231,20 @@ export default {
     },
     getStartTime () {
       var myDate = new Date(); //实例一个时间对象；
-      let startTime = myDate.getSeconds()
-      console.log(startTime)
-      this.startTime = startTime
+      // let startTime = myDate.getSeconds()
+      console.log(myDate)
+      this.startTime = myDate
     },
     getEndTime () {
       var myDate = new Date(); //实例一个时间对象；
-      let endTime = myDate.getSeconds()
-      console.log(endTime)
-      this.endTime = endTime
+      // let endTime = myDate.getSeconds()
+      console.log(myDate)
+      this.endTime = myDate
     },
     //时间差
     timeDifference (startTime, endTime) { //可以传日期时间或时间戳
-      const times = endTime - startTime
-
-      console.log(times)
+      const times = (endTime - startTime) / 1000
       this.time = times
-      console.log(this.time)
-
     },
     //删除
     delImg_chukudan (i) {
@@ -257,15 +253,15 @@ export default {
     },
     handleClick (tab, event) {
 
-      if (this.liList_chuKu.length == 0) {
-        this.$notify.error({
-          title: '错误',
-          message: '请先添加打印的文件'
-        });
-      } else {
-        this.slot_err = 'placeholder'
+      // if (this.liList_chuKu.length == 0) {
+      //   this.$notify.error({
+      //     title: '错误',
+      //     message: '请先添加打印的文件'
+      //   });
+      // } else {
+      //   this.slot_err = 'placeholder'
 
-      }
+      // }
     },
     //限制打印的张数5张
     limitNum () {

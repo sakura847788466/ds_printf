@@ -6,7 +6,8 @@
       <div class="print_box"
            :style="{'display':(istrue?'block':'none'),'padding':'10px'}">
         <div class="select_box">
-          <span class="select" :style="{'display':(this.liList_chuKu.length>=5?'none':'')}">
+          <span class="select"
+                :style="{'display':(this.liList_chuKu.length>=5?'none':'')}">
             <i class="iconfont icon-jia"></i>
             <b>请选择打印的出库单</b>
             <b>仅限于jpg/png/pdf</b>
@@ -53,10 +54,10 @@
         <el-image :src="src"
                   :preview-src-list="srcList"
                   style="height:172px;width:100%;">
-          <div :slot="slot_err"  >
-            <img   src="../Home/null.jpg"  style="height:172px;width:100%;"/>
-              
-            
+          <div :slot="slot_err">
+            <img src="../Home/null.jpg"
+                 style="height:172px;width:100%;" />
+
           </div>
         </el-image>
       </div>
@@ -107,7 +108,7 @@ export default {
       successTime: 0,
       failTime: 0,
       time: 0,
-      slot_err:'error',
+      slot_err: 'error',
       endtTime: '',
       startTime: '',
       activeName: 'first',
@@ -128,14 +129,14 @@ export default {
       reader.onload = ($event) => {
         let result = $event.target.result
         const liItem = { url: result, name: name, key: this.index, file: file, type: type }
-        if(this.liList_chuKu.length<=4){
+        if (this.liList_chuKu.length <= 4) {
           console.log(this.liList_chuKu.length)
-            this.liList_chuKu.push(liItem)
-             this.imgurlList.push(result)
-        } else{
+          this.liList_chuKu.push(liItem)
+          this.imgurlList.push(result)
+        } else {
           return
         }
-        
+
 
         //预览
         this.src = result
@@ -216,11 +217,11 @@ export default {
           // this.failTime += 1;
         }
       }).catch((err) => {
-            this.$notify.error({
-            title: '错误',
-            message: err.data
-          });
-          this.failTime += 1;
+        this.$notify.error({
+          title: '错误',
+          message: err.data
+        });
+        this.failTime += 1;
 
       })
     },
@@ -230,50 +231,46 @@ export default {
     },
     getStartTime () {
       var myDate = new Date(); //实例一个时间对象；
-      let startTime = myDate.getSeconds()
-      console.log(startTime)
-      this.startTime = startTime
+      // let startTime = myDate.getSeconds()
+      console.log(myDate)
+      this.startTime = myDate
     },
     getEndTime () {
       var myDate = new Date(); //实例一个时间对象；
-      let endTime = myDate.getSeconds()
-      console.log(endTime)
-      this.endTime = endTime
+      // let endTime = myDate.getSeconds()
+      console.log(myDate)
+      this.endTime = myDate
     },
     //时间差
     timeDifference (startTime, endTime) { //可以传日期时间或时间戳
-      const times =endTime - startTime
-      
-      console.log(times)
+      const times = (endTime - startTime) / 1000
       this.time = times
-      console.log(this.time)
-      
     },
     //删除
     delImg_chukudan (i) {
       this.liList_chuKu.splice(i, 1)
-      this.src =''
+      this.src = ''
     },
     handleClick (tab, event) {
 
-      if(this.liList_chuKu.length ==0){
-        this.$notify.error({
-            title: '错误',
-            message: '请先添加打印的文件'
-          });
-      }else{
-        this.slot_err ='placeholder'
+      // if(this.liList_chuKu.length ==0){
+      //   this.$notify.error({
+      //       title: '错误',
+      //       message: '请先添加打印的文件'
+      //     });
+      // }else{
+      //   this.slot_err ='placeholder'
 
-      }
+      // }
     },
     //限制打印的张数5张
-    limitNum(){
-      if(this.liList_chuKu.length>=5){
+    limitNum () {
+      if (this.liList_chuKu.length >= 5) {
         this.$notify.error({
-            title: '警告',
-            message: '最多只能添加5张'
-          });
-      }else{
+          title: '警告',
+          message: '最多只能添加5张'
+        });
+      } else {
         return
       }
     }
