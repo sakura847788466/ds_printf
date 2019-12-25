@@ -33,7 +33,7 @@
                   <i class="el-icon-document"></i><span style="width: 100px;display: inline-block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{item.name}}</span>
                   <el-button type="primary"
                              style="position:absolute;top:15px;right:0;"
-                             @click="print_conver(num,item.url,item.type)">打印</el-button>
+                             @click="print_conver(num,item.url,item.type,index)">打印</el-button>
 
                 </a>
                 <label class="el-upload-list__item-status-label">
@@ -145,7 +145,7 @@ export default {
       }
       reader.readAsDataURL(file);
     },
-    print_conver (number, file, type) {
+    print_conver (number, file, type, index) {
       if (type == 'pdf') { //pdf
         const base64 = file.split(',')[1]
         console.log(base64)
@@ -161,9 +161,8 @@ export default {
 
         })
         Simulation(data).then((res) => {
-          console.log(res)
           const data = res.data
-          this.printf(number, data)
+          this.printf(number, data, index)
         }).catch((err) => {
           console.log(err)
         })
@@ -180,7 +179,7 @@ export default {
         print_c(data).then((res) => {
           const data = res.data
           if (res.code == 0) {
-            this.printf(number, data)
+            this.printf(number, data, index)
           } else {
             console.log("转换数据失败")
           }
@@ -192,7 +191,7 @@ export default {
 
     },
     // 打印
-    printf (number, data) {
+    printf (number, data, index) {
       this.getStartTime();
       const data_p = {
         number: number,
@@ -205,6 +204,7 @@ export default {
             message: res.data,
             type: 'success'
           });
+          this.liList_chuKu.splice(index, 1)
           this.successTime += 1;
           this.getEndTime()
           this.timeDifference(this.startTime, this.endTime)
@@ -231,19 +231,19 @@ export default {
     },
     getStartTime () {
       var myDate = new Date(); //实例一个时间对象；
-      let startTime = myDate.getSeconds()
-      console.log(startTime)
-      this.startTime = startTime
+      // let startTime = myDate.getSeconds()
+      console.log(myDate)
+      this.startTime = myDate
     },
     getEndTime () {
       var myDate = new Date(); //实例一个时间对象；
-      let endTime = myDate.getSeconds()
-      console.log(endTime)
-      this.endTime = endTime
+      // let endTime = myDate.getSeconds()
+      console.log(myDate)
+      this.endTime = myDate
     },
     //时间差
     timeDifference (startTime, endTime) { //可以传日期时间或时间戳
-      const times = endTime - startTime
+      const times = (endTime - startTime) / 1000
 
       console.log(times)
       this.time = times
@@ -257,15 +257,15 @@ export default {
     },
     handleClick (tab, event) {
 
-      if (this.liList_chuKu.length == 0) {
-        this.$notify.error({
-          title: '错误',
-          message: '请先添加打印的文件'
-        });
-      } else {
-        this.slot_err = 'placeholder'
+      // if (this.liList_chuKu.length == 0) {
+      //   this.$notify.error({
+      //     title: '错误',
+      //     message: '请先添加打印的文件'
+      //   });
+      // } else {
+      //   this.slot_err = 'placeholder'
 
-      }
+      // }
     },
     //限制打印的张数5张
     limitNum () {
@@ -366,14 +366,16 @@ export default {
 .info div {
   display: flex;
   font-size: 18px;
-  justify-content: space-between;
   height: 25px;
 }
 .info div .message {
-  flex: 1;
+  height: 30px;
+  line-height: 30px;
 }
 .info div .number {
-  flex: 1.5;
+  height: 30px;
+  line-height: 30px;
+  margin-left: 10px;
 }
 /* .info span {
   line-height: 20px;
