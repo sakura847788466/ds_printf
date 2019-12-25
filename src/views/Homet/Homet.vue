@@ -4,7 +4,7 @@
       <div class="block">
         <el-image :src="src"
                   :preview-src-list="srcList"
-                  style="height:172px;">
+                  style="height:172px;margin-left: 8px;">
           <div slot="placeholder"
                class="image-slot">
             加载中<span class="dot">...</span>
@@ -93,9 +93,9 @@ export default {
     return {
       message: 'homet',
       num: '',
-      src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+      src: require('../Home/50_20190916001.png'),
       srcList: [
-        'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+        require('../Home/50_20190916001.png'),
       ]
     }
   },
