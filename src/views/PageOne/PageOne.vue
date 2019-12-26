@@ -1,11 +1,17 @@
  <template>
-  <img src="../Home/50_20190916014.png"
-       alt=""
-       style="width:100%;height:100%;display:inline-block;position:absolute;top:1.33333333rem;left:0;">
+  <div>
+    <img src="../Home/50_20190916014.png"
+         alt=""
+         style="width:100%;height:100%;display:inline-block;position:absolute;top:1.33333333rem;left:0;">
+    <Circlet>
+    </Circlet>
+  </div>
+
 </template>
 
 <script>
 import { printStatus, print_c, print, Simulation } from "../../api/index"
+import Circlet from '../../components/Circle/Circle'
 import Axios from 'axios';
 export default {
   name: 'pageone',
@@ -62,7 +68,7 @@ export default {
     },
   },
   components: {
-
+    Circlet
   }
 }
 </script>
