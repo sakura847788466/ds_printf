@@ -12,6 +12,7 @@
 
 <script>
 export default {
+  inject: ['reload'],
   name: 'Circlet',
   data () {
     return {
@@ -20,9 +21,7 @@ export default {
   },
   methods: {
     back () {
-      this.$router.push({
-        path: '/pageone'
-      })
+      this.reload()
     }
   }
 }

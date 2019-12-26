@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header></Header>
-    <router-view />
+    <router-view v-if="isRouterAlive" />
   </div>
 </template>
 
@@ -9,10 +9,24 @@
 import Header from './components/Header/Header'
 export default {
   name: "App",
-  data () {
-    return {}
+  provide () {
+    return {
+      reload: this.reload
+    }
   },
-  methods: {},
+  data () {
+    return {
+      isRouterAlive: true
+    }
+  },
+  methods: {
+    reload () {
+      this.isRouterAlive = false
+      this.$nextTick(function () {
+        this.isRouterAlive = true
+      })
+    }
+  },
   components: { Header },
   props: {}
 
